@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
-
-import "../node_modules/hardhat/console.sol";
+//Ignore import error, may just be editor incompatibility, contract will still compile.
+import "hardhat/console.sol";
 
 contract WavePortal {
     constructor() {
