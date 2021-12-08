@@ -13,3 +13,19 @@ npx hardhat node
 node scripts/sample-script.js
 npx hardhat help
 ```
+
+
+
+Run test script: ```npx hardhat run scripts/run.js```
+# 3 Step Deployment
+
+1. Deploy contract with this command: ```npx hardhat run scripts/deploy.js --network rinkeby```
+
+2. Use Contract Address and input into front-end
+
+3. Copy contract json from artifacts/contracts/contractName into utils/contractName in front-end
+
+
+
+
+
