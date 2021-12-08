@@ -1,25 +1,43 @@
+//npx hardhat run scripts/run.js
+//npx hardhat run scripts/deploy.js --network rinkeby
 const main = async () => {
     const [owner, randomPerson] = await hre.ethers.getSigners();
-    const waveContractFactory = await hre.ethers.getContractFactory('WavePortal');
-    const waveContract = await waveContractFactory.deploy();
-    await waveContract.deployed();
+    const adoptDinoFactory = await hre.ethers.getContractFactory('AdoptADino');
+    const adoptADinoContract = await adoptDinoFactory.deploy({
+        value: hre.ethers.utils.parseEther('0.1'),
+      });
+    await adoptADinoContract.deployed();
 
     console.log("Contract deployed by:", owner.address);
-    console.log("Contract deployed to:", waveContract.address);
+    console.log("Contract deployed to:", adoptADinoContract.address);
 
-    let waveCount;
+    let adoptCount;
    
 
-    let waveTxn = await waveContract.wave();
-    await waveTxn.wait();
+    let contractBalance = await hre.ethers.provider.getBalance(
+        adoptADinoContract.address
+      );
+      console.log(
+        'Contract balance:',
+        hre.ethers.utils.formatEther(contractBalance)
+      );
+        console.log("ADOPT 1");
+   const adoptTxn = await adoptADinoContract.adopt();
+    await adoptTxn.wait();
 
-    
-    waveCount = await waveContract.getTotalWaves();
 
-    waveTxn = await waveContract.connect(randomPerson).wave();
-    await waveTxn.wait();
+    adoptCount = await adoptADinoContract.getTotalDinos();
 
-    waveCount = await waveContract.getTotalWaves();
+    contractBalance = await hre.ethers.provider.getBalance(adoptADinoContract.address);
+    console.log(
+      'Contract balance:',
+      hre.ethers.utils.formatEther(contractBalance)
+    );
+
+    let allDinos = await adoptADinoContract.getAllDinos();
+    console.log(allDinos);
+
+
 };
 
 const runMain = async () => {
