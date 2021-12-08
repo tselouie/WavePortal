@@ -48,7 +48,7 @@ contract AdoptADino {
          */
         lastAdoptedAt[msg.sender] = block.timestamp;
         totalAdoptions += 1;
-        uint256 id = (block.difficulty + block.timestamp + seed) % 100 % 12;
+        uint256 id = (block.difficulty + block.timestamp + seed) % 100 % 14; // limit it to 7
         console.log("%s adopted a dino with an ID of %d", msg.sender, id);
 
         /*
